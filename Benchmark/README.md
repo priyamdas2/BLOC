@@ -18,7 +18,7 @@ manopt/
 ```
 After downloading, please replace the existing `manopt` folder in this repository (which contains only instructions and no source files) with the downloaded `manopt` folder.
 
-## Benchmark stidy code Reproducibility
+## Benchmark study code reproducibility
 
 To reproduce all numerical results reported in the main manuscript, please follow the steps below.
 
