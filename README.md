@@ -17,7 +17,7 @@ BLOC/
 ├── DEMO/                      # Demo scripts illustrating how to use BLOC (serial + parallel examples)
 ├── Real data analysis/        # Real-data application workflows (proteomics network analysis)
 ├── Simulation study/          # Simulation experiments for baseline / moderate dimension settings, using Gaussian likelihood
-├── Simulation study large p/  # Simulation experiments for large-p / high-dimensional regimes, using Frobenius norm
+├── Simulation study large d/  # Simulation experiments for large-d / high-dimensional regimes, using Frobenius norm
 ├── images/                    # Figures used in the paper/README (e.g., diagrams, flowcharts)
 └── README.md                  # Main repository README
 ```
