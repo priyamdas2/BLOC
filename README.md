@@ -1,55 +1,129 @@
 # BLOC: Black-box Optimization over Correlation Matrices
 
-**BLOC** is a general-purpose, derivative-free optimization framework for estimating **sparse covariance and correlation matrices** under **arbitrary user-defined loss and penalty functions**. The method operates directly on the nonlinear manifold of correlation matrices—symmetric, positive definite matrices with unit diagonal—while supporting **non-convex**, **non-differentiable**, and **black-box** objectives.
+<p align="center">
+  <img src="images/BLOC_concept_v2.png" width="90%">
+</p>
 
-This repository accompanies the paper:
+**BLOC** (*Black-box Optimization over Correlation matrices*) is a general-purpose framework for **sparse correlation and covariance matrix estimation** under **arbitrary (possibly non-convex, non-differentiable, or black-box) objective functions**.
 
-> **BLOC: A Flexible Framework for Sparse Covariance Estimation with Existing and User-Defined Penalties**
-
-and provides fully reproducible code for benchmark studies, simulation experiments, and real-data analyses reported in the manuscript.
-
----
-
-## Motivation
-
-Many existing covariance and correlation estimation methods are penalty-specific, rely on convex relaxations or local approximations, and lack mechanisms to escape local optima in non-convex settings. **BLOC** addresses these limitations by combining (i) a smooth angular reparameterization of correlation matrices via Cholesky decomposition, which converts constrained matrix optimization into unconstrained Euclidean optimization, and (ii) a global, derivative-free optimization engine based on **Recursive Modified Pattern Search (RMPS)** with adaptive step-size control and restart mechanisms. As a result, BLOC enables sparse covariance estimation with **any penalty of choice** (e.g., Lasso, Elastic Net, SCAD, MCP, Ridge, or user-defined penalties) while guaranteeing that all iterates remain valid correlation matrices.
+BLOC is designed to operate **directly on the space of valid correlation matrices**, guaranteeing **positive definiteness and unit diagonals at every iteration**, while enabling **global, gradient-free optimization**. The method couples a **geometric reparameterization of the correlation matrix manifold** with a powerful **recursive pattern search algorithm**, making it both flexible and scalable in high dimensions.
 
 ---
 
-## Key Contributions
+## 🔑 Key Features
 
-- Penalty-agnostic framework: plug in any sparsity-inducing penalty or loss function  
-- Global optimization: explicit restart strategy to escape local minima in non-convex landscapes  
-- Geometry-aware design: optimization over a bijective angular representation of correlation matrices  
-- Theoretical guarantees: stationarity, reachability, global convergence in probability, and sublinear convergence rates under mild conditions  
-- Scalable implementation: supports parallel evaluations and high-dimensional settings  
+- **Guaranteed validity**  
+  Every iterate produced by BLOC is a valid correlation matrix (symmetric, positive definite, unit diagonal).
+
+- **Black-box optimization**  
+  The objective function only needs to be *evaluated*—no gradients, Hessians, or likelihood structure required.
+
+- **Penalty-agnostic**  
+  Supports convex and non-convex penalties (LASSO, Ridge, Elastic Net, SCAD, MCP, capped-ℓ₁, or user-defined penalties).
+
+- **Global exploration**  
+  Built-in restart and step-size reset mechanisms enable systematic escape from poor local minima.
+
+- **Parallelizable**  
+  Coordinate evaluations can be run in parallel; a \( d \times d \) correlation matrix admits up to \( d(d-1)/2 \) simultaneous coordinate polls.
+
+- **Scalable to high dimensions**  
+  Suitable for \( p < n \) and \( p > n \) regimes.
 
 ---
 
-## Method Overview
+## 📌 Problem Setting
 
-BLOC solves optimization problems of the form  
+Let \( \Gamma_0 \) denote a sparse \( d \times d \) correlation matrix. BLOC targets optimization problems of the form
+
 \[
-\min_{\mathbf{C} \in \mathcal{C}_M} h(\mathbf{C}), \quad 
-\mathcal{C}_M = \{\mathbf{C} \succ 0,\; \mathbf{C} = \mathbf{C}^\top,\; \mathrm{diag}(\mathbf{C}) = 1\},
+\min_{\Gamma \in \mathcal{C}_d}
+\; h_n(\Gamma) + \sum_{i \neq j} p_\lambda(|\gamma_{ij}|),
 \]
-by mapping \(\mathbf{C}\) to angular parameters via a bijective Cholesky–hyperspherical transformation, optimizing the transformed objective using RMPS in unconstrained Euclidean space, and mapping the solution back to a valid correlation matrix.
 
-A schematic illustration of the search principle (Fermi’s principle) underlying RMPS is shown below.
+where  
+- \( \mathcal{C}_d \) is the space of full-rank correlation matrices,  
+- \( h_n(\cdot) \) is an arbitrary empirical loss (Gaussian likelihood, Frobenius norm loss, robust loss, depth-based loss, etc.),  
+- \( p_\lambda(\cdot) \) is a sparsity-inducing penalty applied to off-diagonal entries.
 
-![Fermi principle illustration](image/Fermi.png)
+Direct optimization over \( \mathcal{C}_d \) is challenging due to **positive-definiteness and unit-diagonal constraints**. BLOC overcomes this by transforming the problem into an **unconstrained Euclidean optimization** via a bijective angular representation.
 
 ---
 
-## Repository Structure
+## 🧠 Method Overview
+
+### 1. Angular Cholesky Reparameterization
+
+Every correlation matrix \( \Gamma \in \mathcal{C}_d \) can be uniquely written as
+\[
+\Gamma = L L^\top,
+\]
+where each row of \( L \) lies on a unit hypersphere. BLOC represents these rows using **hyperspherical angles**, yielding a **smooth bijection** between correlation matrices and an open hyperrectangle in \( \mathbb{R}^{d(d-1)/2} \).
+
+<p align="center">
+  <img src="images/BLOC_diagram.jpg" width="85%">
+</p>
+
+This mapping ensures:
+- unconstrained optimization in Euclidean space,
+- automatic enforcement of correlation-matrix constraints.
+
+---
+
+### 2. Recursive Modified Pattern Search (RMPS)
+
+On the transformed space, BLOC applies **Recursive Modified Pattern Search (RMPS)**, a derivative-free global optimization algorithm featuring:
+
+- coordinate-wise polling in \( \pm \) directions,
+- adaptive step-size reduction,
+- run-wise restarts for global exploration,
+- parallel evaluation of candidate points.
+
+<p align="center">
+  <img src="images/BLOC_concept_v2.png" width="90%">
+</p>
+
+---
+
+## 📐 Theoretical Guarantees
+
+BLOC is supported by rigorous theory, including:
+
+- **Statistical guarantees**  
+  - Frobenius-norm convergence rates for local minimizers  
+  - Sparsistency (exact support recovery) under standard non-convex penalties  
+
+- **Algorithmic guarantees**  
+  - Stationarity when no improving coordinate direction exists  
+  - Probabilistic reachability of neighborhoods of the global minimizer  
+  - Global convergence in probability under mild regularity conditions  
+  - Sublinear convergence rates for smooth convex objectives (within a run)
+
+These results hold for **general losses**, extending classical theory beyond Gaussian likelihoods.
+
+---
+
+## 🧪 Empirical Performance
+
+Extensive simulations and benchmark studies show that BLOC:
+
+- outperforms state-of-the-art sparse covariance estimators under non-convex penalties,
+- achieves lower Frobenius and spectral norm errors,
+- delivers superior sparsity recovery,
+- remains stable in high dimensions.
+
+A real-data application to **pan-gynecologic proteomics networks** demonstrates BLOC’s ability to produce interpretable, pathway-informed correlation structures.
+
+---
+
+## 🗂 Repository Structure
 
 ```text
 BLOC/
-├── Benchmark/                 # Global optimization benchmark experiments
-├── Simulation/                # Simulation study (covariance estimation)
-├── Simulation_Frobenius/      # p > n Frobenius norm simulations
-├── Real_data_analysis/        # Pan-gynecologic proteomics application
-├── image/                     # Figures used in the manuscript
-├── utils/                     # Helper functions
-├── README.md                  # This file
+├── BLOC/                  # Core MATLAB source code
+├── DEMO/                  # Reproducible demo scripts (serial & parallel)
+├── Supp functions/        # Supporting utilities
+├── images/                # Figures used in paper and README
+├── manopt/                # Placeholder (see note below)
+├── README.md              # This file
 ```
