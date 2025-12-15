@@ -2,7 +2,7 @@ clearvars;
 warning('off', 'all');
 addpath('./BLOC/');
 addpath('./Simulation data/');
-reps_to_do = [6,7,8];
+reps_to_do = [6,7,8]; % Perform any rep <subset of> {1,2,3,4,5,6,7,8,9,10}
 
 rng(1)
 % ------------------- User Inputs -------------------
@@ -115,6 +115,7 @@ for data_rep = reps_to_do
     end
    
 end
+
 
 
 
