@@ -30,19 +30,22 @@ BLOC is designed to operate **directly on the space of valid correlation matrice
 
 ## 📌 Problem Setting
 
-Let \( \Gamma_0 \) denote a sparse \( d \times d \) correlation matrix. BLOC targets optimization problems of the form
+Let Γ₀ denote a sparse *d × d* correlation matrix.  
+BLOC targets optimization problems of the form:
 
-\[
-\min_{\Gamma \in \mathcal{C}_d}
-\; h_n(\Gamma) + \sum_{i \neq j} p_\lambda(|\gamma_{ij}|),
-\]
+<pre>
+minimize   hₙ(Γ) + ∑<sub>i ≠ j</sub> p<sub>λ</sub>(|γ<sub>ij</sub>|)
+subject to Γ ∈ 𝒞<sub>d</sub>
+</pre>
 
-where  
-- \( \mathcal{C}_d \) is the space of full-rank correlation matrices,  
-- \( h_n(\cdot) \) is an arbitrary empirical loss (Gaussian likelihood, Frobenius norm loss, robust loss, depth-based loss, etc.),  
-- \( p_\lambda(\cdot) \) is a sparsity-inducing penalty applied to off-diagonal entries.
+where:
 
-Direct optimization over \( \mathcal{C}_d \) is challenging due to **positive-definiteness and unit-diagonal constraints**. BLOC overcomes this by transforming the problem into an **unconstrained Euclidean optimization** via a bijective angular representation.
+- **𝒞<sub>d</sub>** denotes the space of full-rank correlation matrices (symmetric, positive definite, unit diagonal).
+- **h<sub>n</sub>(·)** is an arbitrary empirical loss (e.g., Gaussian negative log-likelihood, Frobenius-norm loss, robust loss, depth-based loss).
+- **p<sub>λ</sub>(·)** is a sparsity-inducing penalty applied to off-diagonal entries (e.g., LASSO, SCAD, MCP, capped-ℓ₁, or user-defined penalties).
+
+Direct optimization over **𝒞<sub>d</sub>** is challenging due to the positive-definiteness and unit-diagonal constraints.  
+BLOC resolves this by reparameterizing the correlation-matrix manifold via an angular Cholesky transformation, converting the problem into an unconstrained Euclidean optimization while ensuring every iterate remains a valid correlation matrix.
 
 ---
 
