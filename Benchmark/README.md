@@ -18,7 +18,7 @@ manopt/
 ```
 After downloading, please replace the existing `manopt` folder in this repository (which contains only instructions and no source files) with the downloaded `manopt` folder.
 
-## Benchmark study code reproducibility
+## Code Reproducibility
 
 To reproduce all numerical results reported in the main manuscript, please follow the steps below.
 
@@ -30,22 +30,16 @@ Run the script `Benchmark_study.m` for the following test functions:
 - `input_vals = 3` : Rosenbrock  
 - `input_vals = 4` : Rastrigin  
 
-For each function, set the problem dimension to:
-
+For each function, set the problem dimension to `M = 5, 10, 20, 50`.
 
 ### Step 2: High-Dimensional Benchmark Experiments
 Run the script `Benchmark_study_high_dim.m` using the same set of test functions:
-- Ackley, Griewank, Rosenbrock, and Rastrigin (`input_vals = 1–4`)
-
-with the high-dimensional setting:
-
+Ackley, Griewank, Rosenbrock, and Rastrigin (`input_vals = 1–4`),  
+with the high-dimensional setting `M = 100`.
 
 ### Step 3: Results Aggregation
 Finally, execute the script `Summary.m` to compile and summarize all benchmark results.
 
-All final outputs, as reported in the main draft, are automatically generated and saved in the directory:
-
+All final outputs, as reported in the main draft, are automatically generated and saved in the directory `BLOC/Benchmark/Outputs/`.  
 
 These files contain the complete set of tables and summaries used in the manuscript.
-
-
