@@ -69,11 +69,15 @@ BLOC resolves this by reparameterizing the correlation-matrix manifold via an an
 
 ### 1. Angular Cholesky Reparameterization
 
-Every correlation matrix \( \Gamma \in \mathcal{C}_d \) can be uniquely written as
-\[
-\Gamma = L L^\top,
-\]
-where each row of \( L \) lies on a unit hypersphere. BLOC represents these rows using **hyperspherical angles**, yielding a **smooth bijection** between correlation matrices and an open hyperrectangle in \( \mathbb{R}^{d(d-1)/2} \).
+Every correlation matrix Γ belonging to the space 𝒞_d admits a unique Cholesky decomposition of the form
+
+Γ = L · Lᵀ,
+
+where L is a lower-triangular matrix with unit-norm rows and positive diagonal entries.  
+Each row of L therefore lies on a unit hypersphere.
+
+BLOC represents these rows using **hyperspherical (angular) coordinates**, which induces a **smooth, bijective mapping** between the space of valid correlation matrices and an open hyperrectangle in Euclidean space of dimension d(d−1)/2. This transformation allows unconstrained optimization while guaranteeing that every iterate corresponds to a valid correlation matrix.
+
 
 <p align="center">
   <img src="images/BLOC_diagram.jpg" width="85%">
