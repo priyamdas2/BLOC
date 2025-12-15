@@ -31,8 +31,8 @@ NumLambdas = 20;
 lambda_array = 10.^linspace(log10lambdaLB, log10lambdaUB, NumLambdas);
 lambda_array = lambda_array(9:13);
 
-a_array_SCAD = linspace(3, 5, 5); % 3.7
-gamma_array_MCP = 3.5; %linspace(2, 4, 5); %3
+a_array_SCAD = linspace(3, 5, 5); 
+gamma_array_MCP = linspace(2, 4, 5); 
 
 % ------------ Read correlation matrix -----------------
 C_true_filename = sprintf('C_p_%d_n_%d_C_%s.csv', p, n, Ctype);
@@ -115,6 +115,7 @@ for data_rep = reps_to_do
     end
    
 end
+
 
 
 
