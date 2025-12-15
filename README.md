@@ -30,6 +30,7 @@ BLOC/
 ├── images/                    # Figures used in the paper/README (e.g., diagrams, flowcharts)
 └── README.md                  # Main repository README
 ```
+---
 
 ## 🔑 Key Features
 
