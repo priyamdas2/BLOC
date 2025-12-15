@@ -317,4 +317,10 @@ BLOC preserves biologically expected within-pathway correlations while adaptivel
 
 Overall, BLOC provides a flexible, globally aware, and parallelizable approach that advances the state of the art in correlation matrix optimization while maintaining both theoretical rigor and practical usability.
 
+---
 
+## 💬 Contact
+
+For questions, please contact:  
+**Priyam Das**  
+[dasp4@vcu.edu](mailto:dasp4@vcu.edu)
