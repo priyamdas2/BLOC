@@ -16,8 +16,8 @@ BLOC/
 ├── Benchmark/                 # Benchmark experiments and comparisons
 ├── DEMO/                      # Demo scripts illustrating how to use BLOC (serial + parallel examples)
 ├── Real data analysis/        # Real-data application workflows (proteomics network analysis)
-├── Simulation study/          # Simulation experiments (baseline / moderate dimension settings)
-├── Simulation study large p/  # Simulation experiments for large-p / high-dimensional regimes
+├── Simulation study/          # Simulation experiments for baseline / moderate dimension settings, using Gaussian likelihood
+├── Simulation study large p/  # Simulation experiments for large-p / high-dimensional regimes, using Frobenius norm
 ├── images/                    # Figures used in the paper/README (e.g., diagrams, flowcharts)
 └── README.md                  # Main repository README
 ```
@@ -40,7 +40,7 @@ BLOC/
   Coordinate evaluations can be run in parallel; a \( d \times d \) correlation matrix admits up to \( d(d-1)/2 \) simultaneous coordinate polls.
 
 - **Scalable to high dimensions**  
-  Suitable for \( p < n \) and \( p > n \) regimes.
+  Suitable for \( d < n \) and \( d > n \) regimes.
 
 ---
 
