@@ -202,21 +202,17 @@ The 27 proteins are partitioned into five non-overlapping pathways. Let g(i) den
 
 The matrix P is symmetric, so P_ij = P_ji. With this construction, only **across-pathway protein pairs** are penalized.
 
-For each cancer type, the correlation matrix is estimated by solving the following penalized optimization problem.
+For each cancer type, the correlation matrix is estimated by solving the following structured penalized optimization problem:
 
-The objective combines a data-fit term with a structured sparsity penalty that is applied selectively to off-diagonal correlations:
+<pre>
+minimize   h<sub>n</sub>(Γ)
+           + λ · ∑<sub>i &lt; j</sub> P<sub>ij</sub> · SCAD(|Γ<sub>ij</sub>|; a)
 
-    minimize    h_n(Gamma)
-                + lambda times the sum over all i < j of
-                  [ P_ij multiplied by SCAD applied to abs(Gamma_ij) ]
+subject to Γ ∈ 𝒞<sub>d</sub>
+           (symmetric, positive definite, unit diagonal)
+</pre>
 
-    subject to  Gamma being a valid correlation matrix
-                (symmetric, positive definite, and with unit diagonal entries)
-
-Here, h_n(Gamma) denotes the chosen loss function measuring agreement with the observed data, lambda controls the overall sparsity level, and SCAD is a nonconvex penalty designed to reduce bias for large correlations. The binary matrix P defines the penalty cover: correlations between proteins within the same pathway are not penalized, while correlations across different pathways are selectively shrunk toward zero.
-
-
-Here, h_n(Γ) denotes the Frobenius-norm loss between the empirical and model-implied correlation matrices, λ controls the overall level of sparsity, and SCAD(·; a) is the smoothly clipped absolute deviation penalty with shape parameter a. Penalization is applied **only** to correlations selected by the penalty cover P.
+Here, h<sub>n</sub>(Γ) denotes the chosen data-fit loss, λ controls the overall degree of sparsity, and SCAD(·; a) is a nonconvex penalty with shape parameter a. The binary matrix P defines the penalty cover: correlations between proteins within the same biological pathway are left unpenalized, while correlations across different pathways are selectively shrunk toward zero.
 
 Equivalently, the penalty acts on the elementwise (Hadamard) product P ∘ Γ, producing a **block-structured penalty** that preserves within-pathway coherence while encouraging sparsity across pathways. This biologically informed design yields interpretable correlation networks that align closely with known signaling biology.
 
