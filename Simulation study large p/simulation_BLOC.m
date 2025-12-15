@@ -12,7 +12,7 @@ penalty = 1; % 1 = SCAD, 2 = MCP
 n = 50;
 
 
-Num_exps = 1;
+Num_exps = 10;
 tol = 1e-3; % sparsity detection
 
 
@@ -113,6 +113,7 @@ csvwrite(filename, output_BLOC);
 %                     'NumExp_%d_2Lq_BCD_half.csv'], ...
 %                     method_num, p, n, Num_exps);
 %     csvwrite(filename, output_Lq_BCD_half);
+
 
 
 
