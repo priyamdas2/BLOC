@@ -5,7 +5,7 @@ addpath('./BLOC/');
 addpath('./helper funs/');
 addpath('./outputs/');
 
-method_num = 3;
+method_num = 3; % 1 = Block matrix, 2 = Toeplitz, 3 = Banded
 p = 100;
 n = 50;
 Num_exps = 10;
@@ -92,5 +92,6 @@ dlmwrite(filename, round(summary_mean, 3), 'precision', '%.3f');
 filename = sprintf(['outputs/Summary_ALL_methods_SE_method_%d_p_%d_n_%d.csv'], ...
                     method_num, p, n);
 dlmwrite(filename, round(summary_stderr, 3), 'precision', '%.3f');
+
 
 out = format_mean_se_csv(method_num, p, n);
