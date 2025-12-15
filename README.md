@@ -34,7 +34,7 @@ BLOC/
 
 ## ▶️ Demonstration and usage examples
 
-The repository includes a dedicated **DEMO/** directory containing fully reproducible examples that illustrate how to use **BLOC** in practice.
+The repository includes a dedicated **DEMO/** directory containing fully reproducible examples that illustrate how to use **BLOC** in practice for optimizing any objective function over domain 𝒞<sub>d</sub>.
 
 The demo scripts showcase:
 - Optimization using BLOC under both serial and parallel execution,
