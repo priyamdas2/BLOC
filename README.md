@@ -104,7 +104,7 @@ This mapping ensures:
 
 On the transformed space, BLOC applies **Recursive Modified Pattern Search (RMPS)**, a derivative-free global optimization algorithm featuring:
 
-- coordinate-wise polling in \( \pm \) directions,
+- coordinate-wise polling in d(d−1) directions while optimizing over 𝒞_d,
 - adaptive step-size reduction,
 - run-wise restarts for global exploration,
 - parallel evaluation of candidate points.
