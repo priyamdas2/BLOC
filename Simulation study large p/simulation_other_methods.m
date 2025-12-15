@@ -6,7 +6,7 @@ addpath('./helper funs/');
 %addpath('./Simulation data/');
 
 p = 100; % covariance dimension 20, 50, 100
-method_num = 3;
+method_num = 3; % 1 = Block matrix, 2 = Toeplitz, 3 = Banded
 SIGMA = cov_model(p, method_num);
 
 % figure(1); subplot(121); imagesc(SIGMA);title('Original');
@@ -275,4 +275,5 @@ xlabel('Number of samples (N)'); grid; xlim([Ns(1), Ns(end)]);
 legend('L1-ADMM','Lq-BCD (q=0.5)','Hard-BCD','SCAD-BCD','IRW-ADMM','IRW-trad','Soft thresh.','Hard thresh.','SCAD thresh.','Location','Best');
 
 Eigs
+
 Eigs_cov
