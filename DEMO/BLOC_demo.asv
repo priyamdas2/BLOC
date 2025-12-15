@@ -1,0 +1,39 @@
+clearvars;
+warning('off', 'all');
+addpath('./BLOC/');
+
+%% BLOC (non-parallel) to optimize 10 x 10 dim modified ackley function
+
+M = 10;
+objFun = @(C) modified_ackley(C);
+ 
+% Generating random starting point
+rand_seed = 2025;
+C0 = randCorrMatrix(M, rand_seed);
+
+% Setting BLOC options
+options.MaxRuns = 5;
+options.MaxTime = 20; % (in seconds)
+
+% Run BLOC
+[C_BLOC, fval_BLOC, comp_time_BLOC] = BLOC(objFun, C0, options);
+
+% Print final solution
+
+C_BLOC
+%% BLOCparallel to optimize 20 x 20 dim modified griewank function
+        
+M = 20;
+objFun = @(C) modified_griewank(C);
+ 
+% Generating random starting point
+rand_seed = 404;
+C0 = randCorrMatrix(M, rand_seed);
+
+% Setting BLOC options
+options.MaxRuns =  20;
+options.phi = 10^(-10);
+options.MaxIter = 1000;
+
+% Run BLOC
+[C_BLOC, fval_BLOC, comp_time_BLOC] = BLOCparallel(objFun, C0, options); 
