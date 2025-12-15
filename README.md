@@ -32,6 +32,25 @@ BLOC/
 ```
 ---
 
+## ▶️ Demonstration and usage examples
+
+The repository includes a dedicated **DEMO/** directory containing fully reproducible examples that illustrate how to use **BLOC** in practice.
+
+The demo scripts showcase:
+- Basic usage of BLOC for sparse correlation estimation,
+- Optimization under both serial and parallel execution,
+- Customization of optimization settings (e.g., runtime, number of runs, step-size control),
+- Application to representative objective functions.
+
+To keep the main README concise, detailed explanations of inputs, outputs, and execution options are provided in the **DEMO directory README**.
+
+👉 Please refer to the following page for step-by-step instructions and example workflows:  
+**https://github.com/priyamdas2/BLOC/tree/main/DEMO**
+
+Users are encouraged to start with the demo scripts before applying BLOC to custom objective functions or large-scale datasets.
+
+---
+
 ## 🔑 Key Features
 
 - **Guaranteed validity**  
