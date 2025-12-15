@@ -80,7 +80,7 @@ BLOC resolves this by reparameterizing the correlation-matrix manifold via an an
 
 ### 1. Angular Cholesky Reparameterization
 
-Every correlation matrix Γ belonging to the space 𝒞_d admits a unique Cholesky decomposition of the form
+Every correlation matrix Γ belonging to the space 𝒞<sub>d</sub> admits a unique Cholesky decomposition of the form
 
 Γ = L · Lᵀ,
 
