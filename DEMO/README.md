@@ -194,7 +194,9 @@ Example:
 If you use BLOC in academic work, please cite the software or accompanying paper as indicated in the main repository.
 
 ---
+## 💬 Contact
 
-## Contact
+For questions, please contact:  
+**Priyam Das**  
+[dasp4@vcu.edu](mailto:dasp4@vcu.edu)
 
-For questions, bug reports, or feature requests, please open an issue on the GitHub repository.
