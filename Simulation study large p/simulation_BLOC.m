@@ -6,7 +6,7 @@ addpath('./helper funs/');
 %addpath('./Simulation data/');
 
 p = 50; % covariance dimension 20, 50, 100
-method_num = 3;
+method_num = 3; % 1 = Block matrix, 2 = Toeplitz, 3 = Banded
 SIGMA = cov_model(p, method_num);
 penalty = 1; % 1 = SCAD, 2 = MCP
 n = 50;
@@ -113,5 +113,6 @@ csvwrite(filename, output_BLOC);
 %                     'NumExp_%d_2Lq_BCD_half.csv'], ...
 %                     method_num, p, n, Num_exps);
 %     csvwrite(filename, output_Lq_BCD_half);
+
 
 
