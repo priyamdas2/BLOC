@@ -179,49 +179,57 @@ As a result, the induced sparsity pattern is **block-structured**, preserving wi
 
 ---
 
-### Estimated correlation structures across cancers
+### Estimated sparse correlation structures by cancer type
 
-Below we display the estimated sparse correlation heatmaps obtained using **BLOC with a SCAD penalty and pathway-based penalty cover** for each cancer type.
-
-<p align="center">
-  <img src="images/plot_corr_BRCA_cropped.jpg" width="45%">
-  <img src="images/plot_corr_CESC_cropped.jpg" width="45%">
-</p>
-
-<p align="center">
-  <img src="images/plot_corr_OV_cropped.jpg" width="45%">
-  <img src="images/plot_corr_UCEC_cropped.jpg" width="45%">
-</p>
-
-<p align="center">
-  <img src="images/plot_corr_UCS_cropped.jpg" width="45%">
-</p>
-
-**Figure:** Estimated sparse correlation heatmaps for five pan-gynecologic cancers using BLOC with SCAD and a pathway-informed penalty cover. Within-pathway structure is preserved, while cross-pathway associations reveal tumor-specific differences in signaling integration.
+Each heatmap below shows the estimated sparse protein–protein correlation matrix obtained using **BLOC with a SCAD penalty and a pathway-based penalty cover**. Proteins are ordered by pathway membership, so block structure corresponds to biological modules.
 
 ---
 
-### Biological interpretation
+#### **BRCA — Breast Carcinoma**
+<p align="center">
+  <img src="images/plot_corr_BRCA_cropped.jpg" width="55%">
+</p>
 
-Several biologically meaningful patterns emerge:
-
-- **Within-pathway coherence** is consistently preserved, with strong positive correlations observed among Cell Cycle proteins (e.g., FOXM1, PCNA, CYCLINB1) and within the PI3K/AKT module (e.g., AKT phosphorylation sites, PRAS40, GSK3 isoforms, PTEN).
-
-- **BRCA and UCEC** exhibit pronounced cross-talk between Hormone Receptor and Hormone Signaling pathways, consistent with estrogen-driven biology.
-
-- **OV** shows partial integration between PI3K/AKT and Cell Cycle modules, suggesting coordinated proliferative signaling.
-
-- **CESC** displays comparatively weaker and more diffuse cross-pathway correlations, reflecting a less hormone-dependent disease mechanism.
-
-- **UCS** presents a strikingly modular structure, with near-independent Cell Cycle and PI3K/AKT blocks. While this may reflect genuine biological heterogeneity, it should be interpreted cautiously due to limited sample size.
-
-Sample sizes differ substantially across cancers (BRCA: 879, CESC: 171, OV: 428, UCEC: 404, UCS: 48), and sparsity levels—particularly for UCS—are influenced in part by statistical power.
+Strong within-pathway coherence is observed in Cell Cycle and PI3K/AKT modules, together with pronounced cross-talk between Hormone Receptor and Hormone Signaling pathways.
 
 ---
 
-### Summary
+#### **CESC — Cervical Squamous Cell Carcinoma**
+<p align="center">
+  <img src="images/plot_corr_CESC_cropped.jpg" width="55%">
+</p>
 
-This real-data application highlights the strength of BLOC in **embedding biological prior knowledge directly into correlation estimation**. By preserving expected within-pathway associations and selectively shrinking cross-pathway edges, BLOC yields interpretable, tumor-specific network structures that align closely with known signaling biology and may inform downstream therapeutic insights.
+CESC exhibits comparatively weaker and more diffuse cross-pathway correlations, consistent with a less hormone-driven biological profile.
 
+---
 
+#### **OV — Ovarian Serous Cystadenocarcinoma**
+<p align="center">
+  <img src="images/plot_corr_OV_cropped.jpg" width="55%">
+</p>
+
+OV shows partial integration between the PI3K/AKT and Cell Cycle pathways, suggesting coordinated proliferative signaling mechanisms.
+
+---
+
+#### **UCEC — Uterine Corpus Endometrial Carcinoma**
+<p align="center">
+  <img src="images/plot_corr_UCEC_cropped.jpg" width="55%">
+</p>
+
+UCEC demonstrates strong Hormone Receptor–Hormone Signaling interactions, closely resembling the network structure observed in BRCA.
+
+---
+
+#### **UCS — Uterine Carcinosarcoma**
+<p align="center">
+  <img src="images/plot_corr_UCS_cropped.jpg" width="55%">
+</p>
+
+UCS displays a strikingly modular structure with near-independent Cell Cycle and PI3K/AKT blocks. The extreme sparsity reflects both biological heterogeneity and limited sample size.
+
+---
+
+**Summary:**  
+BLOC preserves biologically expected within-pathway correlations while adaptively shrinking cross-pathway edges, revealing tumor-specific differences in pathway integration across pan-gynecologic cancers.
 
