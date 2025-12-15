@@ -115,14 +115,17 @@ A real-data application to **pan-gynecologic proteomics networks** demonstrates 
 
 ---
 
-## 🗂 Repository Structure
+## 📂 Repository Structure
+
+The current top-level layout of this repository (branch: `main`) is:
 
 ```text
 BLOC/
-├── BLOC/                  # Core MATLAB source code
-├── DEMO/                  # Reproducible demo scripts (serial & parallel)
-├── Supp functions/        # Supporting utilities
-├── images/                # Figures used in paper and README
-├── manopt/                # Placeholder (see note below)
-├── README.md              # This file
+├── Benchmark/                 # Benchmark experiments and comparisons
+├── DEMO/                      # Demo scripts illustrating how to use BLOC (serial + parallel examples)
+├── Real data analysis/        # Real-data application workflows (proteomics network analysis)
+├── Simulation study/          # Simulation experiments (baseline / moderate dimension settings)
+├── Simulation study large p/  # Simulation experiments for large-p / high-dimensional regimes
+├── images/                    # Figures used in the paper/README (e.g., diagrams, flowcharts)
+└── README.md                  # Main repository README
 ```
