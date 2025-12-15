@@ -34,24 +34,26 @@ BLOC/
 ## 🔑 Key Features
 
 - **Guaranteed validity**  
-  Every iterate produced by BLOC is a valid correlation matrix (symmetric, positive definite, unit diagonal).
+  Every iterate produced by BLOC is a valid correlation matrix: symmetric, positive definite, and with unit diagonal entries.
 
 - **Black-box optimization**  
-  The objective function only needs to be *evaluated*—no gradients, Hessians, or likelihood structure required.
+  The objective function only needs to be *evaluated*. No gradients, Hessians, likelihood structure, or smoothness assumptions are required.
 
 - **Penalty-agnostic**  
-  Supports convex and non-convex penalties (LASSO, Ridge, Elastic Net, SCAD, MCP, capped-ℓ₁, or user-defined penalties).
+  Supports both convex and non-convex penalties, including LASSO, Ridge, Elastic Net, SCAD, MCP, capped-ℓ₁, as well as fully user-defined penalties.
 
 - **Global exploration**  
-  Built-in restart and step-size reset mechanisms enable systematic escape from poor local minima.
+  Built-in restart and step-size reset mechanisms allow the algorithm to systematically escape poor local minima and explore the objective landscape.
 
 - **Parallelizable**  
-  Coordinate evaluations can be run in parallel; a \( d \times d \) correlation matrix admits up to \( d(d-1)/2 \) simultaneous coordinate polls.
+  Coordinate-wise objective evaluations can be executed in parallel.  
+  For a d-by-d correlation matrix, up to d(d−1)/2 coordinate directions can be evaluated simultaneously.
 
 - **Scalable to high dimensions**  
-  Suitable for \( d < n \) and \( d > n \) regimes.
+  Designed to perform reliably in both low-dimensional (d < n) and high-dimensional (d > n) regimes.
 
 ---
+
 
 ## 📌 Problem Setting
 
