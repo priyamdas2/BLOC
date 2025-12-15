@@ -133,17 +133,44 @@ These results hold for **general losses**, extending classical theory beyond Gau
 
 ---
 
-## 🧪 Empirical Performance
+## 🧪 Numerical results for sparse covariance estimation
 
-Extensive simulations and benchmark studies show that BLOC:
+We evaluate the finite-sample performance of **BLOC** through extensive simulation studies under standard sparse covariance models. Results are reported for both low-dimensional (n > d) and high-dimensional (d ≥ n) regimes, with performance assessed in terms of estimation accuracy, sparsity recovery, and numerical stability. Across all experiments, BLOC is compared against representative state-of-the-art methods for sparse covariance estimation.
 
-- outperforms state-of-the-art sparse covariance estimators under non-convex penalties,
-- achieves lower Frobenius and spectral norm errors,
-- delivers superior sparsity recovery,
-- remains stable in high dimensions.
-  
 ---
 
+## 🔹 Gaussian likelihood setting (n > d)
+
+We first consider the classical regime in which the number of observations exceeds the number of variables (n > d), where the Gaussian log-likelihood provides a natural loss function. In this setting, BLOC is instantiated using a likelihood-based objective and equipped with **nonconvex penalties** (SCAD and MCP). Performance is compared against the ℓ1-penalized estimator implemented in the `Spcov` R package, representing a convex baseline.
+
+Two sparsity designs are examined:
+
+- **Block-diagonal structure**, where variables form small correlated clusters and all other entries are zero.
+- **Uniform-sparse structure**, where a small fraction of off-diagonal correlations are nonzero and scattered irregularly.
+
+Across all configurations, BLOC with SCAD or MCP achieves a favorable balance between estimation accuracy and sparsity recovery. Under block-diagonal designs, BLOC attains consistently high true positive rates while controlling false positives, leading to substantially improved Matthews correlation coefficients compared with ℓ1 penalization, which tends to over-select edges. Under uniform sparsity, the advantages of nonconvex penalties are even more pronounced: BLOC maintains low false positive rates while accurately recovering dispersed signals.
+
+As dimensionality increases, BLOC remains stable and reliable, whereas the ℓ1-based estimator either deteriorates in accuracy or fails numerically in the largest settings. These results highlight the robustness of BLOC under Gaussian likelihood, combining reduced bias from nonconvex penalties with the reliability of global optimization.
+
+---
+
+## 🔹 Frobenius-norm setting (d ≥ n)
+
+We next study the high-dimensional regime where the number of variables is comparable to or exceeds the sample size (d ≥ n). In this setting, likelihood-based methods become unstable, and BLOC instead minimizes a Frobenius-norm loss measuring discrepancy between the estimated and sample correlation matrices.
+
+Three canonical covariance structures are considered:
+
+- **Block-diagonal**, representing clustered dependence,
+- **Toeplitz**, capturing long-range dependence with geometric decay,
+- **Banded**, representing local dependence with finite bandwidth.
+
+BLOC with SCAD and MCP penalties is compared against a broad collection of existing methods, including ℓ1-ADMM estimators, reweighted ADMM procedures, nonconvex block coordinate descent algorithms, and standard thresholding approaches. Implementations of competing methods follow established benchmark settings.
+
+Across all structures and dimensional regimes, BLOC consistently delivers the lowest Frobenius and spectral norm errors, as well as the smallest mean absolute deviation of off-diagonal entries. Importantly, BLOC maintains a strong balance between sensitivity and specificity: true positive rates remain high without the inflation of false positives commonly observed for thresholding and ℓ1-based methods, resulting in superior Matthews correlation coefficients.
+
+As dimensionality increases, the advantage of BLOC becomes more pronounced. While many competing methods suffer from numerical instability or degraded accuracy, BLOC remains stable and continues to recover sparse correlation structure effectively. These findings demonstrate that BLOC provides a robust and scalable solution for sparse covariance estimation in challenging high-dimensional settings.
+
+---
 
 ## 🧬 Pathway-informed correlation estimation for pan-gynecologic proteomics data
 
