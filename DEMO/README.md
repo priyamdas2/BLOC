@@ -146,9 +146,9 @@ The demo uses modest option settings for clarity and speed.
 `options.DisplayEvery = 5;`
 
 - `MaxRuns`: maximum number of outer runs
-- `phi`: numerical tolerance controlling internal step refinement
+- `phi`: minimum allowed step-size
 - `MaxIter`: maximum number of iterations per run
-- `DisplayEvery`: frequency of progress updates
+- `DisplayEvery`: every that many seconds update is displayed (only if `DisplayUpdate` is set to 1; that's true by default)
 
 These values can be modified directly in `BLOC_demo.m` to trade off speed versus accuracy.
 
