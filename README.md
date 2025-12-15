@@ -147,6 +147,7 @@ Extensive simulations and benchmark studies show that BLOC:
 
 ## 🧬 Pathway-informed correlation estimation for pan-gynecologic proteomics data
 
+
 We illustrate the practical utility of **BLOC** through an application to **reverse-phase protein array (RPPA)** data from *The Cancer Genome Atlas (TCGA)*, focusing on five pan-gynecologic cancers:
 
 - Breast carcinoma (**BRCA**)
@@ -161,21 +162,30 @@ The proteomics data are obtained from *The Cancer Proteome Atlas (TCPA)* and con
 
 ---
 
-### Pathway-aware modeling via penalty covers
+### Pathway-informed objective function
 
-Following prior biological literature, we focus on a curated panel of **27 proteins**, grouped into **five non-overlapping functional pathways**:
+To reflect known biological structure in estimation, we leverage the general flexibility of **BLOC**, which can optimize any user-defined objective function over the space of correlation matrices. This allows us to incorporate structured penalties through a *penalty cover*, specifying exactly which entries of the correlation matrix are subject to penalization.
 
-- **Cell Cycle**
-- **Hormone Receptor**
-- **Hormone Signaling**
-- **PI3K/AKT**
-- **Breast Reactive**
+In this application, proteins are grouped into biologically meaningful signaling pathways. Proteins within the same pathway are expected to interact and therefore exhibit correlated behavior; accordingly, **within-pathway correlations are not penalized**. In contrast, correlations between proteins from different pathways are less likely to be consistently strong and are therefore **penalized unless strongly supported by the data**.
 
-A key strength of BLOC is that it can optimize **any user-defined objective function over the space of correlation matrices**. We leverage this flexibility to incorporate biological prior knowledge through a **structured penalty cover**.
+The 27 proteins are partitioned into five non-overlapping pathways. Let g(i) denote the pathway membership of protein i. We define a binary penalty-cover matrix P as:
 
-Specifically, correlations **within the same pathway** are *not penalized*, while correlations **across different pathways** are penalized using a non-convex SCAD penalty. This design reflects the expectation that proteins within a pathway are biologically coordinated, whereas cross-pathway correlations should only persist if strongly supported by data.
+    P_ij = 0   if proteins i and j belong to the same pathway
+    P_ij = 1   if proteins i and j belong to different pathways
 
-As a result, the induced sparsity pattern is **block-structured**, preserving within-pathway coherence while adaptively shrinking weaker cross-pathway associations.
+The matrix P is symmetric, so P_ij = P_ji. With this construction, only **across-pathway protein pairs** are penalized.
+
+For each cancer type, the correlation matrix is estimated by solving the following optimization problem:
+
+    minimize    h_n(Γ)
+              + λ · sum over i < j of [ P_ij × SCAD(|Γ_ij|; a) ]
+
+    subject to Γ being a valid correlation matrix
+               (symmetric, positive definite, unit diagonal)
+
+Here, h_n(Γ) denotes the Frobenius-norm loss between the empirical and model-implied correlation matrices, λ controls the overall level of sparsity, and SCAD(·; a) is the smoothly clipped absolute deviation penalty with shape parameter a. Penalization is applied **only** to correlations selected by the penalty cover P.
+
+Equivalently, the penalty acts on the elementwise (Hadamard) product P ∘ Γ, producing a **block-structured penalty** that preserves within-pathway coherence while encouraging sparsity across pathways. This biologically informed design yields interpretable correlation networks that align closely with known signaling biology.
 
 ---
 
