@@ -15,4 +15,5 @@ manopt/
 ├── manifolds
 ├── solvers
 └── tools
-
+```
+After downloading, please replace the existing `manopt` folder in this repository (which contains only instructions and no source files) with the downloaded `manopt` folder.
