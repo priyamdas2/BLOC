@@ -13,5 +13,5 @@ Execute this script for `case_id = 1` (BRCA), `case_id = 2` (CESC), `case_id = 3
 Run `3_post_analysis_plot.R`, ensuring that the working directory is set to the location of this file.  
 Execute the script for `case_id = 1` (BRCA), `case_id = 2` (CESC), `case_id = 3` (OV), `case_id = 4` (UCEC), and `case_id = 5` (UCS).  
 
-This step generates all figures and plots reported in the main manuscript.
+This step generates all plots reported in the main manuscript under the real data analysis section titled *Pathway-informed correlation estimation for pan-gynecologic proteomics data*.
 
