@@ -197,9 +197,11 @@ In this application, proteins are grouped into biologically meaningful signaling
 
 The 27 proteins are partitioned into five non-overlapping pathways. Let g(i) denote the pathway membership of protein i. We define a binary penalty-cover matrix P as:
 
-    P_ij = 0   if proteins i and j belong to the same pathway
-    P_ij = 1   if proteins i and j belong to different pathways
-
+<pre>
+    P<sub>ij</sub>  = 0   if proteins i and j belong to the same pathway
+    P<sub>ij</sub>  = 1   if proteins i and j belong to different pathways
+</pre>
+  
 The matrix P is symmetric, so P_ij = P_ji. With this construction, only **across-pathway protein pairs** are penalized.
 
 For each cancer type, the correlation matrix is estimated by solving the following structured penalized optimization problem:
