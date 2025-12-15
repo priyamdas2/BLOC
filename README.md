@@ -37,8 +37,7 @@ BLOC/
 The repository includes a dedicated **DEMO/** directory containing fully reproducible examples that illustrate how to use **BLOC** in practice.
 
 The demo scripts showcase:
-- Basic usage of BLOC for sparse correlation estimation,
-- Optimization under both serial and parallel execution,
+- Optimization using BLOC under both serial and parallel execution,
 - Customization of optimization settings (e.g., runtime, number of runs, step-size control),
 - Application to representative objective functions.
 
