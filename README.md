@@ -202,13 +202,19 @@ The 27 proteins are partitioned into five non-overlapping pathways. Let g(i) den
 
 The matrix P is symmetric, so P_ij = P_ji. With this construction, only **across-pathway protein pairs** are penalized.
 
-For each cancer type, the correlation matrix is estimated by solving the following optimization problem:
+For each cancer type, the correlation matrix is estimated by solving the following penalized optimization problem.
 
-    minimize    h_n(Γ)
-              + λ · sum over i < j of [ P_ij × SCAD(|Γ_ij|; a) ]
+The objective combines a data-fit term with a structured sparsity penalty that is applied selectively to off-diagonal correlations:
 
-    subject to Γ being a valid correlation matrix
-               (symmetric, positive definite, unit diagonal)
+    minimize    h_n(Gamma)
+                + lambda times the sum over all i < j of
+                  [ P_ij multiplied by SCAD applied to abs(Gamma_ij) ]
+
+    subject to  Gamma being a valid correlation matrix
+                (symmetric, positive definite, and with unit diagonal entries)
+
+Here, h_n(Gamma) denotes the chosen loss function measuring agreement with the observed data, lambda controls the overall sparsity level, and SCAD is a nonconvex penalty designed to reduce bias for large correlations. The binary matrix P defines the penalty cover: correlations between proteins within the same pathway are not penalized, while correlations across different pathways are selectively shrunk toward zero.
+
 
 Here, h_n(Γ) denotes the Frobenius-norm loss between the empirical and model-implied correlation matrices, λ controls the overall level of sparsity, and SCAD(·; a) is the smoothly clipped absolute deviation penalty with shape parameter a. Penalization is applied **only** to correlations selected by the penalty cover P.
 
