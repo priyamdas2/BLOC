@@ -1,6 +1,6 @@
 ## Simulation Study (Gaussian Likelihood Scenario)
 
-This folder contains scripts to reproduce the simulation results (with Gaussian likelihood scenario; `p < n`; here `p` is equivalent to `d` as defined in the manuscript) reported in the manuscript. The simulations are organized by method and followed by a summary step.
+This folder contains scripts to reproduce the simulation results under the Gaussian likelihood scenario (`p < n`; here `p` is equivalent to `d` as defined in the manuscript) reported in the manuscript. The simulations are organized by method and followed by a summary step.
 
 ### Method: BLOC
 
