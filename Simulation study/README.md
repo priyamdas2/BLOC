@@ -15,6 +15,7 @@ Before proceeding to the summary stage, ensure that all 10 experiments have been
 ###Method: SpCov
 
 **Step 2** 
+
 Run `SpCov.R` (update work directory to be same as the location of this file)  for problem sizes `(p,n) = (20,50), (50,100), (100,150)` and covariance types `Ctype = "Blockdiag"` and `Ctype = "SparseUniform"`.  
 Under our simulation settings, `SpCov` may take a long time to converge or may encounter errors for the `(p,n) = (100,150)` scenario.
 
