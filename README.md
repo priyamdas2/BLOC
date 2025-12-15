@@ -274,3 +274,46 @@ UCS displays a strikingly modular structure with near-independent Cell Cycle and
 **Summary:**  
 BLOC preserves biologically expected within-pathway correlations while adaptively shrinking cross-pathway edges, revealing tumor-specific differences in pathway integration across pan-gynecologic cancers.
 
+---
+
+## 💬 Discussion
+
+**BLOC** is a general-purpose framework for sparse covariance and correlation matrix estimation with the following key characteristics:
+
+- **Methodological generality**
+  - Optimizes arbitrary objective functions over the space of valid correlation matrices.
+  - Imposes no restrictions on the choice of loss function or sparsity penalty.
+  - Naturally accommodates nonconvex penalties such as SCAD and MCP.
+  - Supports customized masking or penalty-cover structures to encode domain knowledge.
+
+- **Strong empirical performance**
+  - Consistently achieves low estimation error and accurate support recovery.
+  - Performs well in both low-dimensional (n > d, Gaussian likelihood) and high-dimensional (d ≥ n, Frobenius loss) regimes.
+  - Nonconvex penalties improve Frobenius and spectral norm accuracy relative to ℓ1-based baselines.
+  - Delivers superior sparsity recovery measured by mean absolute deviation and Matthews correlation coefficient.
+  - Recursive modified pattern search effectively escapes poor local minima, balancing global exploration with local refinement.
+
+- **Theoretical support**
+  - Limit points of the algorithm satisfy local stationarity conditions.
+  - Restart mechanisms provide global reachability of high-quality solutions.
+  - Convergence guarantees are available under convex objectives, supporting practical reliability.
+
+- **Computational scalability**
+  - Naturally parallelizable due to coordinate-wise perturbations in the angular parameterization.
+  - Evaluations can be distributed across independent threads with minimal communication.
+  - Parallel implementations exhibit substantial runtime reductions and near-linear speedups in higher dimensions.
+  - Remains practical for large-scale and rugged optimization problems.
+
+- **Real-data applicability**
+  - Easily integrates biological prior knowledge through pathway-based penalty covers.
+  - Preserves expected within-pathway coherence while revealing tumor-specific cross-pathway differences.
+  - Produces interpretable correlation networks without modifying the core algorithm.
+
+- **Limitations and future directions**
+  - Not always the fastest option for simple, convex problems where specialized solvers may suffice.
+  - Global exploration increases computational cost relative to purely local methods.
+  - Future work includes accelerated variants, adaptive exploration strategies, and hybrid global–local optimization schemes.
+
+Overall, BLOC provides a flexible, globally aware, and parallelizable approach that advances the state of the art in correlation matrix optimization while maintaining both theoretical rigor and practical usability.
+
+
