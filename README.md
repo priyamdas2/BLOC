@@ -141,9 +141,87 @@ Extensive simulations and benchmark studies show that BLOC:
 - achieves lower Frobenius and spectral norm errors,
 - delivers superior sparsity recovery,
 - remains stable in high dimensions.
+  
+---
 
-A real-data application to **pan-gynecologic proteomics networks** demonstrates BLOC’s ability to produce interpretable, pathway-informed correlation structures.
+
+## 🧬 Pathway-informed correlation estimation for pan-gynecologic proteomics data
+
+We illustrate the practical utility of **BLOC** through an application to **reverse-phase protein array (RPPA)** data from *The Cancer Genome Atlas (TCGA)*, focusing on five pan-gynecologic cancers:
+
+- Breast carcinoma (**BRCA**)
+- Cervical squamous cell carcinoma (**CESC**)
+- Ovarian serous cystadenocarcinoma (**OV**)
+- Uterine corpus endometrial carcinoma (**UCEC**)
+- Uterine carcinosarcoma (**UCS**)
+
+These cancers share common hormonal drivers and signaling dysregulation, yet differ markedly in clinical presentation and disease progression. Understanding **protein–protein correlation structure across key signaling pathways** is therefore of strong biological and translational interest.
+
+The proteomics data are obtained from *The Cancer Proteome Atlas (TCPA)* and consist of RPPA-based protein abundance measurements spanning diverse cellular processes, including cell cycle regulation, hormone receptor activity, PI3K/AKT signaling, apoptosis, metabolism, immune response, and epithelial–mesenchymal transition.
 
 ---
+
+### Pathway-aware modeling via penalty covers
+
+Following prior biological literature, we focus on a curated panel of **27 proteins**, grouped into **five non-overlapping functional pathways**:
+
+- **Cell Cycle**
+- **Hormone Receptor**
+- **Hormone Signaling**
+- **PI3K/AKT**
+- **Breast Reactive**
+
+A key strength of BLOC is that it can optimize **any user-defined objective function over the space of correlation matrices**. We leverage this flexibility to incorporate biological prior knowledge through a **structured penalty cover**.
+
+Specifically, correlations **within the same pathway** are *not penalized*, while correlations **across different pathways** are penalized using a non-convex SCAD penalty. This design reflects the expectation that proteins within a pathway are biologically coordinated, whereas cross-pathway correlations should only persist if strongly supported by data.
+
+As a result, the induced sparsity pattern is **block-structured**, preserving within-pathway coherence while adaptively shrinking weaker cross-pathway associations.
+
+---
+
+### Estimated correlation structures across cancers
+
+Below we display the estimated sparse correlation heatmaps obtained using **BLOC with a SCAD penalty and pathway-based penalty cover** for each cancer type.
+
+<p align="center">
+  <img src="images/plot_corr_BRCA_cropped.jpg" width="45%">
+  <img src="images/plot_corr_CESC_cropped.jpg" width="45%">
+</p>
+
+<p align="center">
+  <img src="images/plot_corr_OV_cropped.jpg" width="45%">
+  <img src="images/plot_corr_UCEC_cropped.jpg" width="45%">
+</p>
+
+<p align="center">
+  <img src="images/plot_corr_UCS_cropped.jpg" width="45%">
+</p>
+
+**Figure:** Estimated sparse correlation heatmaps for five pan-gynecologic cancers using BLOC with SCAD and a pathway-informed penalty cover. Within-pathway structure is preserved, while cross-pathway associations reveal tumor-specific differences in signaling integration.
+
+---
+
+### Biological interpretation
+
+Several biologically meaningful patterns emerge:
+
+- **Within-pathway coherence** is consistently preserved, with strong positive correlations observed among Cell Cycle proteins (e.g., FOXM1, PCNA, CYCLINB1) and within the PI3K/AKT module (e.g., AKT phosphorylation sites, PRAS40, GSK3 isoforms, PTEN).
+
+- **BRCA and UCEC** exhibit pronounced cross-talk between Hormone Receptor and Hormone Signaling pathways, consistent with estrogen-driven biology.
+
+- **OV** shows partial integration between PI3K/AKT and Cell Cycle modules, suggesting coordinated proliferative signaling.
+
+- **CESC** displays comparatively weaker and more diffuse cross-pathway correlations, reflecting a less hormone-dependent disease mechanism.
+
+- **UCS** presents a strikingly modular structure, with near-independent Cell Cycle and PI3K/AKT blocks. While this may reflect genuine biological heterogeneity, it should be interpreted cautiously due to limited sample size.
+
+Sample sizes differ substantially across cancers (BRCA: 879, CESC: 171, OV: 428, UCEC: 404, UCS: 48), and sparsity levels—particularly for UCS—are influenced in part by statistical power.
+
+---
+
+### Summary
+
+This real-data application highlights the strength of BLOC in **embedding biological prior knowledge directly into correlation estimation**. By preserving expected within-pathway associations and selectively shrinking cross-pathway edges, BLOC yields interpretable, tumor-specific network structures that align closely with known signaling biology and may inform downstream therapeutic insights.
+
 
 
