@@ -1,0 +1,10 @@
+Row,min value,value s.e.,time [mean (se)]
+BLOC,3.75e+02,6.49e-13,1031.01 (60.384)
+BLOCparallel,3.75e+02,4.43e-01,3600.29 (0.022)
+fmincon:active-set,9.96e+04,2.02e+04,377.28 (5.830)
+fmincon:interior-point,4.13e+08,2.30e+08,0.20 (0.004)
+fmincon:sqp,2.03e+03,4.59e+05,202.14 (18.788)
+Manopt:barzilai-borwein,1.98e+10,1.56e+09,1.60 (0.044)
+Manopt:conjugate-gradient,3.75e+02,4.29e-02,901.03 (174.999)
+Manopt:steepest-descent,3.75e+02,2.71e+00,958.70 (94.386)
+Manopt:trust-region,3.75e+02,1.38e-01,3255.01 (105.917)

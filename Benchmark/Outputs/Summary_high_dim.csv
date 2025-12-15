@@ -1,0 +1,5 @@
+Row,min_value,value_se,time_mean_se
+ackley,4.46e-10,5.94e-02,18000.47 (0.073)
+griewank,4.98e-12,1.25e-01,18000.47 (0.088)
+rosenbrock,4.02e+04,1.90e+06,18000.41 (0.091)
+rastrigin,4.84e+03,4.14e+02,18000.69 (0.171)
