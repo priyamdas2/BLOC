@@ -6,6 +6,15 @@ BLOC is designed to operate **directly on the space of valid correlation matrice
 
 ---
 
+### Notation note
+
+Throughout the code, comments, and documentation, the symbols **`p`** and **`d`** may occasionally be used interchangeably.  
+Both symbols refer to the **same quantity**: the **dimension of the correlation matrix of interest**.
+
+This interchangeable usage reflects differences in notation commonly adopted across optimization and statistical literature.  
+For clarity, readers may treat **`p ≡ d`** everywhere in this repository.
+
+---
 
 ## 📂 Repository Structure
 
@@ -17,7 +26,7 @@ BLOC/
 ├── DEMO/                      # Demo scripts illustrating how to use BLOC (serial + parallel examples)
 ├── Real data analysis/        # Real-data application workflows (proteomics network analysis)
 ├── Simulation study/          # Simulation experiments for baseline / moderate dimension settings, using Gaussian likelihood
-├── Simulation study large d/  # Simulation experiments for large-d / high-dimensional regimes, using Frobenius norm
+├── Simulation study large p/  # Simulation experiments for large-d (or p) / high-dimensional regimes, using Frobenius norm
 ├── images/                    # Figures used in the paper/README (e.g., diagrams, flowcharts)
 └── README.md                  # Main repository README
 ```
