@@ -1,6 +1,6 @@
-## Simulation Study
+## Simulation Study (with Gaussian likelihood scenario)
 
-This folder contains scripts to reproduce the simulation results reported in the manuscript. The simulations are organized by method and followed by a summary step.
+This folder contains scripts to reproduce the simulation results (with Gaussian likelihood scenario; `p<n`; here `p` is equivalent to `d` as in manuscript) reported in the manuscript. The simulations are organized by method and followed by a summary step.
 
 ### Method: BLOC
 
