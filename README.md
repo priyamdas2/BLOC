@@ -9,7 +9,7 @@ BLOC is designed to operate **directly on the space of valid correlation matrice
 ### Notation note
 
 Throughout the code, comments, and documentation, the symbols **`p`** and **`d`** may occasionally be used interchangeably.  
-Both symbols refer to the **same quantity**: the **dimension of the correlation matrix of interest**.
+Both symbols refer to the **same quantity**: the **dimension (number of rows/columns) of the correlation matrix of interest**.
 
 This interchangeable usage reflects differences in notation commonly adopted across optimization and statistical literature.  
 For clarity, readers may treat **`p ≡ d`** everywhere in this repository.
