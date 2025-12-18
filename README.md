@@ -66,7 +66,7 @@ Users are encouraged to start with the demo scripts before applying BLOC to cust
 
 - **Parallelizable**  
   Coordinate-wise objective evaluations can be executed in parallel.  
-  For a d-by-d correlation matrix, up to d(d−1)/2 coordinate directions can be evaluated simultaneously.
+  For a d-by-d correlation matrix, up to d(d−1) coordinate directions can be evaluated simultaneously.
 
 - **Scalable to high dimensions**  
   Designed to perform reliably in both low-dimensional (d < n) and high-dimensional (d > n) regimes.
