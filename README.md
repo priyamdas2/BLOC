@@ -8,8 +8,7 @@ BLOC is designed to operate **directly on the space of valid correlation matrice
 
 > Das P, Banerjee T, Bhuyan P (2026).  
 > *BLOC: A Global Optimization Framework for Sparse Covariance Estimation with Non-Convex Penalties*.  
-> **ArXiv**.  
-> [https://arxiv.org/abs/2603.29169](https://arxiv.org/abs/2603.29169) 
+> **ArXiv**:  [https://arxiv.org/abs/2603.29169](https://arxiv.org/abs/2603.29169) 
 
 ---
 ### Notation note
