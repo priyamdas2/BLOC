@@ -4,8 +4,14 @@
 
 BLOC is designed to operate **directly on the space of valid correlation matrices**, guaranteeing **positive definiteness and unit diagonals at every iteration**, while enabling **global, gradient-free optimization**. The method couples a **geometric reparameterization of the correlation matrix manifold** with a powerful **recursive pattern search algorithm**, making it both flexible and scalable in high dimensions.
 
----
+## 📚 Citation
 
+> Das P, Banerjee T, Bhuyan P (2026).  
+> *BLOC: A Global Optimization Framework for Sparse Covariance Estimation with Non-Convex Penalties*.  
+> **ArXiv**.  
+> [https://arxiv.org/abs/2603.29169](https://arxiv.org/abs/2603.29169) 
+
+---
 ### Notation note
 
 Throughout the code, comments, and documentation, the symbols **`p`** and **`d`** may occasionally be used interchangeably.  
