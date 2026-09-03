@@ -116,7 +116,7 @@ BLOC represents these rows using **hyperspherical (angular) coordinates**, which
 
 
 <p align="center">
-  <img src="images/BLOC_diagram_v2.jpg" width="95%">
+  <img src="images/BLOC_diagram_v2.png" width="99%">
 </p>
 
 This mapping ensures:
