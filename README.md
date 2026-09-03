@@ -27,13 +27,14 @@ The current top-level layout of this repository (branch: `main`) is:
 
 ```text
 BLOC/
-├── Benchmark/                 # Benchmark experiments and comparisons
-├── DEMO/                      # Demo scripts illustrating how to use BLOC (serial + parallel examples)
-├── Real data analysis/        # Real-data application workflows (proteomics network analysis)
-├── Simulation study/          # Simulation experiments for baseline / moderate dimension settings, using Gaussian likelihood
-├── Simulation study large p/  # Simulation experiments for large-p (or d) / high-dimensional regimes, using Frobenius norm
-├── images/                    # Figures used in the paper/README (e.g., diagrams, flowcharts)
-└── README.md                  # Main repository README
+├── Benchmark/                      # Benchmark experiments and comparisons
+├── DEMO/                           # Demo scripts illustrating how to use BLOC (serial + parallel examples)
+├── Real data analysis/             # Real-data application workflows (proteomics network analysis)
+├── Simulation study/               # Simulation experiments for baseline / moderate dimension settings, using Gaussian likelihood
+├── Simulation study large p/       # Simulation experiments for large-p (or d) / high-dimensional regimes, using Frobenius norm
+├── Simulation study matrix depth/  # Simulation experiments for matrix depth problem
+├── images/                         # Figures used in the paper/README (e.g., diagrams, flowcharts)
+└── README.md                       # Main repository README
 ```
 ---
 
