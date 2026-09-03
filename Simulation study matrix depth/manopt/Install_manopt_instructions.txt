@@ -1,0 +1,10 @@
+For copyright reasons, the 'manopt' source files are not redistributed here. Please visit the following link to download the 'manopt' MATLAB toolbox (https://www.manopt.org/). After downloading, the 'manopt' folder should contain the following five subfolders:
+
+manopt
+|- autodiff
+|- core
+|- lifts
+|- manifolds
+|- solvers
+|- tools
+ 
