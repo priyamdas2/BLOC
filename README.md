@@ -197,6 +197,25 @@ As dimensionality increases, the advantage of BLOC becomes more pronounced. Whil
 
 ---
 
+## 🔹 Matrix-depth setting: discontinuous robust loss
+
+Finally, we examine a setting designed to highlight the objective-agnostic nature of BLOC by replacing the smooth likelihood- and Frobenius-based losses with a **genuinely discontinuous matrix-depth criterion**. Motivated by robust covariance depth methods, the loss is constructed from empirical directional depth evaluated over a fixed collection of projection directions. Because the empirical depth is based on indicator counts, it is **piecewise constant with discontinuous jumps and locally flat regions**, creating an optimization landscape for which conventional smooth local optimization methods can be problematic.
+
+We consider \((d,n)=(20,200)\) under two sparse correlation structures:
+
+- **Block-diagonal**, representing clustered dependence,
+- **Banded**, representing local dependence with finite bandwidth.
+
+To introduce robustness as an additional challenge, **10% of the observations are contaminated** by draws from a higher-variance Gaussian distribution. BLOC with SCAD and MCP penalties is compared against several general-purpose local optimization procedures: active-set, interior-point, and SQP implementations of `fmincon`, together with Barzilai–Borwein, conjugate-gradient, and steepest-descent methods from `Manopt`. All methods optimize the **same penalized matrix-depth objective**, use the same contaminated datasets, fixed projection directions, tuning procedure, and identity-matrix initialization.
+
+The results show a pronounced advantage for BLOC in this discontinuous setting. Under the block-diagonal structure, BLOC attains empirical depth approximately **0.461**, close to the theoretical maximum of \(0.5\), while the local procedures attain depth around **0.417**. BLOC simultaneously reduces Frobenius error from roughly **7.15** for the local methods to approximately **1.65–1.69**, while achieving high sensitivity with well-controlled false positive rates. Similar behavior is observed under the banded structure, where BLOC reaches depth around **0.45**, compared with approximately **0.39** for the local procedures, while providing substantially improved estimation accuracy and a more favorable balance between true and false edge recovery.
+
+The difference is closely related to the geometry of the matrix-depth objective. Small local perturbations can leave a piecewise-constant objective completely unchanged, causing local procedures to remain near their initial solution. BLOC's recursive coordinate polling can instead directly evaluate candidates at finite distances and explore beyond such locally flat regions without requiring an improving path through intermediate points.
+
+This experiment illustrates an important use case for BLOC beyond standard smooth covariance-estimation objectives: **the optimization framework itself does not need to be redesigned when the loss becomes nonsmooth or discontinuous**. The same BLOC machinery used for Gaussian likelihood and Frobenius loss can therefore be applied directly to robust matrix-depth estimation, while preserving positive definiteness throughout the search.
+
+---
+
 ## 🧬 Pathway-informed correlation estimation for pan-gynecologic proteomics data
 
 
