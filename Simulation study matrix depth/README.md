@@ -2,6 +2,27 @@
 
 This folder contains scripts to reproduce the simulation results under the matrix depth problem. The simulations are organized by method and followed by a summary step.
 
+## Manopt Toolbox Requirement
+
+For copyright reasons, the **Manopt** source files are not redistributed in this repository.  
+Please download the Manopt MATLAB toolbox directly from the official website:
+
+👉 https://www.manopt.org/
+
+After downloading and extracting the toolbox, the `manopt` directory should have the following structure:
+
+```text
+manopt/
+├── autodiff
+├── core
+├── lifts
+├── manifolds
+├── solvers
+└── tools
+```
+After downloading, please replace the existing `manopt` folder in this repository (which contains only instructions and no source files) with the downloaded `manopt` folder.
+
+
 ### Method: BLOC
 Run `simulation_BLOC.m` with covariance structures specified by `method_num = 1` (Block matrix) and `method_num = 3` (Banded), and penalty choices given by `penalty = 1` (SCAD) and `penalty = 2` (MCP).
 
