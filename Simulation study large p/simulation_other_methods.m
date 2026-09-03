@@ -5,28 +5,28 @@ addpath('./BLOC/');
 addpath('./helper funs/');
 %addpath('./Simulation data/');
 
-p = 100; % covariance dimension 20, 50, 100
+p = 100; % covariance dimension 100/200
 method_num = 3; % 1 = Block matrix, 2 = Toeplitz, 3 = Banded
 SIGMA = cov_model(p, method_num);
 
 % figure(1); subplot(121); imagesc(SIGMA);title('Original');
 
-Ns = [50, 100];
+Ns = [50, 100]; % [50, 100]; 
 Num_exps = 10;
 tol = 1e-3;
 
 
 
 for iN=1:length(Ns)
-    output_L1_ADMM = nan(Num_exps, 7);
-    output_Lq_BCD_half = nan(Num_exps, 7);
-    output_Lq_BCD_zero = nan(Num_exps, 7);
-    output_SCAD_BCD = nan(Num_exps, 7);
-    output_IRW_ADMM = nan(Num_exps, 7);
-    output_Trad_IRW = nan(Num_exps, 7);
-    output_soft_thres = nan(Num_exps, 7);
-    output_hard_thres = nan(Num_exps, 7);
-    output_SCAD_thres = nan(Num_exps, 7);
+    output_L1_ADMM = nan(Num_exps, 8);
+    output_Lq_BCD_half = nan(Num_exps, 8);
+    output_Lq_BCD_zero = nan(Num_exps, 8);
+    output_SCAD_BCD = nan(Num_exps, 8);
+    output_IRW_ADMM = nan(Num_exps, 8);
+    output_Trad_IRW = nan(Num_exps, 8);
+    output_soft_thres = nan(Num_exps, 8);
+    output_hard_thres = nan(Num_exps, 8);
+    output_SCAD_thres = nan(Num_exps, 8);
     
     for k=1:Num_exps
         n = Ns(iN);
@@ -52,7 +52,8 @@ for iN=1:length(Ns)
         err_abs = mean(abs(X(:) - SIGMA(:)));
         X_corr = cov2corr(X);
         [TPR, FPR, MCC] = TPR_FPR_MCC(X_corr, SIGMA, tol);
-        output = [ErrFro(k,1), ErrSpe(k,1), err_abs, TPR, FPR, MCC, T_recd(k,1)];
+        PD = min(real(eig(X))) > -1e-8;
+        output = [ErrFro(k,1), ErrSpe(k,1), err_abs, TPR, FPR, MCC, PD, T_recd(k,1)];
         output_L1_ADMM(k,:) = output;
         
         
@@ -75,13 +76,15 @@ for iN=1:length(Ns)
                 err_abs = mean(abs(X(:) - SIGMA(:)));
                 X_corr = cov2corr(X);
                 [TPR, FPR, MCC] = TPR_FPR_MCC(X_corr, SIGMA, tol);
-                output = [ErrFro(k,iq+1), ErrSpe(k,iq+1), err_abs, TPR, FPR, MCC,T_recd(k,iq+1)];
+                PD = min(real(eig(X))) > -1e-8;
+                output = [ErrFro(k,iq+1), ErrSpe(k,iq+1), err_abs, TPR, FPR, MCC, PD, T_recd(k,iq+1)];
                 output_Lq_BCD_half(k,:) = output;
             else
                 err_abs = mean(abs(X(:) - SIGMA(:)));
                 X_corr = cov2corr(X);
                 [TPR, FPR, MCC] = TPR_FPR_MCC(X_corr, SIGMA, tol);
-                output = [ErrFro(k,iq+1), ErrSpe(k,iq+1), err_abs, TPR, FPR, MCC,T_recd(k,iq+1)];
+                PD = min(real(eig(X))) > -1e-8;
+                output = [ErrFro(k,iq+1), ErrSpe(k,iq+1), err_abs, TPR, FPR, MCC, PD, T_recd(k,iq+1)];
                 output_Lq_BCD_zero(k,:) = output;
             end
 
@@ -102,7 +105,8 @@ for iN=1:length(Ns)
         err_abs = mean(abs(X(:) - SIGMA(:)));
         X_corr = cov2corr(X);
         [TPR, FPR, MCC] = TPR_FPR_MCC(X_corr, SIGMA, tol);
-        output = [ErrFro(k,4), ErrSpe(k,4), err_abs, TPR, FPR, MCC,T_recd(k,4)];
+        PD = min(real(eig(X))) > -1e-8;
+        output = [ErrFro(k,4), ErrSpe(k,4), err_abs, TPR, FPR, MCC, PD, T_recd(k,4)];
         output_SCAD_BCD(k,:) = output;
         
         figure(2);subplot(3,3,4); imagesc(X);
@@ -122,7 +126,8 @@ for iN=1:length(Ns)
         err_abs = mean(abs(X(:) - SIGMA(:)));
         X_corr = cov2corr(X);
         [TPR, FPR, MCC] = TPR_FPR_MCC(X_corr, SIGMA, tol);
-        output = [ErrFro(k,5), ErrSpe(k,5), err_abs, TPR, FPR, MCC,T_recd(k,5)];
+        PD = min(real(eig(X))) > -1e-8;
+        output = [ErrFro(k,5), ErrSpe(k,5), err_abs, TPR, FPR, MCC,PD,T_recd(k,5)];
         output_IRW_ADMM(k,:) = output;
         
         
@@ -143,7 +148,8 @@ for iN=1:length(Ns)
         err_abs = mean(abs(X(:) - SIGMA(:)));
         X_corr = cov2corr(X);
         [TPR, FPR, MCC] = TPR_FPR_MCC(X_corr, SIGMA, tol);
-        output = [ErrFro(k,6), ErrSpe(k,6), err_abs, TPR, FPR, MCC,T_recd(k,6)];
+        PD = min(real(eig(X))) > -1e-8;
+        output = [ErrFro(k,6), ErrSpe(k,6), err_abs, TPR, FPR, MCC,PD,T_recd(k,6)];
         output_Trad_IRW(k,:) = output;
         
         figure(2);subplot(3,3,6); imagesc(X);
@@ -162,7 +168,8 @@ for iN=1:length(Ns)
         err_abs = mean(abs(X(:) - SIGMA(:)));
         X_corr = cov2corr(X);
         [TPR, FPR, MCC] = TPR_FPR_MCC(X_corr, SIGMA, tol);
-        output = [ErrFro(k,7), ErrSpe(k,7), err_abs, TPR, FPR, MCC,T_recd(k,7)];
+        PD = min(real(eig(X))) > -1e-8;
+        output = [ErrFro(k,7), ErrSpe(k,7), err_abs, TPR, FPR, MCC,PD,T_recd(k,7)];
         output_soft_thres(k,:) = output;
         
         
@@ -182,7 +189,8 @@ for iN=1:length(Ns)
         err_abs = mean(abs(X(:) - SIGMA(:)));
         X_corr = cov2corr(X);
         [TPR, FPR, MCC] = TPR_FPR_MCC(X_corr, SIGMA, tol);
-        output = [ErrFro(k,8), ErrSpe(k,8), err_abs, TPR, FPR, MCC,T_recd(k,8)];
+        PD = min(real(eig(X))) > -1e-8;
+        output = [ErrFro(k,8), ErrSpe(k,8), err_abs, TPR, FPR, MCC,PD,T_recd(k,8)];
         output_hard_thres(k,:) = output;
         
         figure(2);subplot(3,3,8); imagesc(X);
@@ -205,45 +213,46 @@ for iN=1:length(Ns)
         err_abs = mean(abs(X(:) - SIGMA(:)));
         X_corr = cov2corr(X);
         [TPR, FPR, MCC] = TPR_FPR_MCC(X_corr, SIGMA, tol);
-        output = [ErrFro(k,9), ErrSpe(k,9), err_abs, TPR, FPR, MCC,T_recd(k,9)];
+        PD = min(real(eig(X))) > -1e-8;
+        output = [ErrFro(k,9), ErrSpe(k,9), err_abs, TPR, FPR, MCC,PD, T_recd(k,9)];
         output_SCAD_thres(k,:) = output;
         
     end
 
 
-    filename = sprintf(['outputs/output_FroSpecAbsTprFprMcc_method_%d_p_%d_n_%d_' ...
+    filename = sprintf(['outputs/output_FroSpecAbsTprFprMccPDTime_method_%d_p_%d_n_%d_' ...
                     'NumExp_%d_1L1_ADMM.csv'], ...
                     method_num, p, n, Num_exps);
     csvwrite(filename, output_L1_ADMM);
-    filename = sprintf(['outputs/output_FroSpecAbsTprFprMcc_method_%d_p_%d_n_%d_' ...
+    filename = sprintf(['outputs/output_FroSpecAbsTprFprMccPDTime_method_%d_p_%d_n_%d_' ...
                     'NumExp_%d_2Lq_BCD_half.csv'], ...
                     method_num, p, n, Num_exps);
     csvwrite(filename, output_Lq_BCD_half);
-    filename = sprintf(['outputs/output_FroSpecAbsTprFprMcc_method_%d_p_%d_n_%d_' ...
+    filename = sprintf(['outputs/output_FroSpecAbsTprFprMccPDTime_method_%d_p_%d_n_%d_' ...
                     'NumExp_%d_3Lq_BCD_zero.csv'], ...
                     method_num, p, n, Num_exps);
     csvwrite(filename, output_Lq_BCD_zero);
-    filename = sprintf(['outputs/output_FroSpecAbsTprFprMcc_method_%d_p_%d_n_%d_' ...
+    filename = sprintf(['outputs/output_FroSpecAbsTprFprMccPDTime_method_%d_p_%d_n_%d_' ...
                     'NumExp_%d_4SCAD_BCD.csv'], ...
                     method_num, p, n, Num_exps);
     csvwrite(filename, output_SCAD_BCD);
-    filename = sprintf(['outputs/output_FroSpecAbsTprFprMcc_method_%d_p_%d_n_%d_' ...
+    filename = sprintf(['outputs/output_FroSpecAbsTprFprMccPDTime_method_%d_p_%d_n_%d_' ...
                     'NumExp_%d_5IRW_ADMM.csv'], ...
                     method_num, p, n, Num_exps);
     csvwrite(filename, output_IRW_ADMM);
-    filename = sprintf(['outputs/output_FroSpecAbsTprFprMcc_method_%d_p_%d_n_%d_' ...
+    filename = sprintf(['outputs/output_FroSpecAbsTprFprMccPDTime_method_%d_p_%d_n_%d_' ...
                     'NumExp_%d_6Trad_IRW.csv'], ...
                     method_num, p, n, Num_exps);
     csvwrite(filename, output_Trad_IRW);
-    filename = sprintf(['outputs/output_FroSpecAbsTprFprMcc_method_%d_p_%d_n_%d_' ...
+    filename = sprintf(['outputs/output_FroSpecAbsTprFprMccPDTime_method_%d_p_%d_n_%d_' ...
                     'NumExp_%d_7soft_thres.csv'], ...
                     method_num, p, n, Num_exps);
     csvwrite(filename, output_soft_thres);
-    filename = sprintf(['outputs/output_FroSpecAbsTprFprMcc_method_%d_p_%d_n_%d_' ...
+    filename = sprintf(['outputs/output_FroSpecAbsTprFprMccPDTime_method_%d_p_%d_n_%d_' ...
                     'NumExp_%d_8hard_thres.csv'], ...
                     method_num, p, n, Num_exps);
     csvwrite(filename, output_hard_thres);
-    filename = sprintf(['outputs/output_FroSpecAbsTprFprMcc_method_%d_p_%d_n_%d_' ...
+    filename = sprintf(['outputs/output_FroSpecAbsTprFprMccPDTime_method_%d_p_%d_n_%d_' ...
                     'NumExp_%d_9SCAD_thres.csv'], ...
                     method_num, p, n, Num_exps);
     csvwrite(filename, output_SCAD_thres);
@@ -254,26 +263,72 @@ for iN=1:length(Ns)
     AvT(iN,:)  = mean(T_recd,1);
 end
 
-figure(4);subplot(1,2,1);
-plot(Ns,AvFE(:,1),'-',Ns,AvFE(:,2),'g--+',Ns,AvFE(:,3),'g-->',Ns,AvFE(:,4),'g--x',Ns,AvFE(:,5),'r--*',...
-    Ns,AvFE(:,6),'r--p',Ns,AvFE(:,7),'b--o',Ns,AvFE(:,8),'b--^',Ns,AvFE(:,9),'b--d','linewidth',1);
-legend('L1-ADMM','Lq-BCD (q=0.5)','Hard-BCD','SCAD-BCD','IRW-ADMM','IRW-trad','Soft thresh.','Hard thresh.','SCAD thresh.','Location','Best');
-grid; xlim([Ns(1), Ns(end)]); xlabel('Number of samples (N)');
+% Set x-axis limits so plotting also works when length(Ns) = 1
+if length(Ns) == 1
+    xpad = max(1, 0.05*abs(Ns(1)));
+    xlims = [Ns(1)-xpad, Ns(1)+xpad];
+else
+    xlims = [Ns(1), Ns(end)];
+end
+
+
+figure(4); subplot(1,2,1);
+plot(Ns,AvFE(:,1),'-s', ...
+     Ns,AvFE(:,2),'g--+', ...
+     Ns,AvFE(:,3),'g-->', ...
+     Ns,AvFE(:,4),'g--x', ...
+     Ns,AvFE(:,5),'r--*', ...
+     Ns,AvFE(:,6),'r--p', ...
+     Ns,AvFE(:,7),'b--o', ...
+     Ns,AvFE(:,8),'b--^', ...
+     Ns,AvFE(:,9),'b--d','linewidth',1);
+
+legend('L1-ADMM','Lq-BCD (q=0.5)','Hard-BCD','SCAD-BCD',...
+       'IRW-ADMM','IRW-trad','Soft thresh.','Hard thresh.',...
+       'SCAD thresh.','Location','Best');
+
+grid;
+xlim(xlims);
+xlabel('Number of samples (N)');
 ylabel('Averaged relative error (Frobenius norm)');
 
-figure(4);subplot(1,2,2);
-plot(Ns,AvSE(:,1),'-',Ns,AvSE(:,2),'g--+',Ns,AvSE(:,3),'g-->',Ns,AvSE(:,4),'g--x',Ns,AvSE(:,5),'r--*',...
-    Ns,AvSE(:,6),'r--p',Ns,AvSE(:,7),'b--o',Ns,AvSE(:,8),'b--^',Ns,AvSE(:,9),'b--d','linewidth',1);
+
+figure(4); subplot(1,2,2);
+plot(Ns,AvSE(:,1),'-s', ...
+     Ns,AvSE(:,2),'g--+', ...
+     Ns,AvSE(:,3),'g-->', ...
+     Ns,AvSE(:,4),'g--x', ...
+     Ns,AvSE(:,5),'r--*', ...
+     Ns,AvSE(:,6),'r--p', ...
+     Ns,AvSE(:,7),'b--o', ...
+     Ns,AvSE(:,8),'b--^', ...
+     Ns,AvSE(:,9),'b--d','linewidth',1);
+
 ylabel('Averaged relative error (Spectral norm)');
-xlabel('Number of samples (N)'); grid; xlim([Ns(1), Ns(end)]);
+xlabel('Number of samples (N)');
+grid;
+xlim(xlims);
+
 
 figure(5);
-plot(Ns,AvT(:,1),'-',Ns,AvT(:,2),'g--+',Ns,AvT(:,3),'g-->',Ns,AvT(:,4),'g--x',Ns,AvT(:,5),'r--*',...
-    Ns,AvT(:,6),'r--p',Ns,AvT(:,7),'b--o',Ns,AvT(:,8),'b--^',Ns,AvT(:,9),'b--d','linewidth',1);
+plot(Ns,AvT(:,1),'-s', ...
+     Ns,AvT(:,2),'g--+', ...
+     Ns,AvT(:,3),'g-->', ...
+     Ns,AvT(:,4),'g--x', ...
+     Ns,AvT(:,5),'r--*', ...
+     Ns,AvT(:,6),'r--p', ...
+     Ns,AvT(:,7),'b--o', ...
+     Ns,AvT(:,8),'b--^', ...
+     Ns,AvT(:,9),'b--d','linewidth',1);
+
 ylabel('Runtime (second)');
-xlabel('Number of samples (N)'); grid; xlim([Ns(1), Ns(end)]);
-legend('L1-ADMM','Lq-BCD (q=0.5)','Hard-BCD','SCAD-BCD','IRW-ADMM','IRW-trad','Soft thresh.','Hard thresh.','SCAD thresh.','Location','Best');
+xlabel('Number of samples (N)');
+grid;
+xlim(xlims);
+
+legend('L1-ADMM','Lq-BCD (q=0.5)','Hard-BCD','SCAD-BCD',...
+       'IRW-ADMM','IRW-trad','Soft thresh.','Hard thresh.',...
+       'SCAD thresh.','Location','Best');
 
 Eigs
-
 Eigs_cov
