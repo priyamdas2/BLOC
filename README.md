@@ -1,4 +1,4 @@
-# Sparse Covariance Estimation under General Nonconvex Penalties: The BLOC framework
+# BLOC: A General Optimization Framework for Sparse Covariance Estimation with Non-Convex Penalties
 
 **BLOC** (*Black-box Optimization over Correlation matrices*) is a general-purpose framework for **sparse correlation and covariance matrix estimation** under **arbitrary (possibly non-convex, non-differentiable, or black-box) objective functions**.
 
